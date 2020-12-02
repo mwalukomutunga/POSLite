@@ -1,0 +1,56 @@
+﻿<UserControl  xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" x:Class="POSLite.Client.Views.Payment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POSLite.Client.Views" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:local1="clr-namespace:POSLite.Client.ViewModels" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                  mc:Ignorable="d"
+       >
+    <UserControl.DataContext>
+        <local1:PaymentViewModel/>
+    </UserControl.DataContext>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService/>
+        <dxmvvm:DispatcherService />
+    </dxmvvm:Interaction.Behaviors>
+
+
+    <Grid  Margin="0" dxlc:DockLayoutControl.Dock="Client">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <dxb:ToolBarControl HorizontalAlignment="Stretch" Grid.Row="0" >
+            <dxb:BarItemSeparator />
+            <dxb:BarButtonItem Command="{Binding NewCommand}" x:Name="btnNew" Content="New" BarItemDisplayMode="ContentAndGlyph" Glyph="{dx:DXImage Image=new_16x16.png}"/>
+            <dxb:BarItemSeparator />
+            <dxb:BarButtonItem  Command="{Binding SaveCommand}" x:Name="btnSave" Content="Save" BarItemDisplayMode="ContentAndGlyph" Glyph="{dx:DXImage Image=save_16x16.png}"/>
+            <dxb:BarItemSeparator />
+            <dxb:BarButtonItem  Command="{Binding UpdateCommand}" x:Name="UpdateEdit" Content="Update" BarItemDisplayMode="ContentAndGlyph" Glyph="{dx:DXImage Image=edit_16x16.png}"/>
+            <dxb:BarItemSeparator />
+            <dxb:BarButtonItem  Command="{Binding DeleteCommand}" x:Name="btnDel" Content="Delete" BarItemDisplayMode="ContentAndGlyph" Glyph="{dx:DXImage Image=delete_16x16.png}"/>
+            <dxb:BarItemSeparator />
+        </dxb:ToolBarControl>
+        <dxlc:DataLayoutControl Grid.Row="1" CurrentItem="{Binding SelectedObject}"/>
+
+        <dxg:GridControl Grid.Row="2"  SelectedItem="{Binding SelectedObject}"  ItemsSource="{Binding GridCollection}" AutoGenerateColumns="AddNew">
+            <!--<dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem FieldName="OrderId" 
+                             SummaryType="Count"
+                             Alignment="Left"/>
+            </dxg:GridControl.TotalSummary>-->
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="PaymentID"  AllowBestFit="true"  Visible="False" ShowInColumnChooser="False"/>
+                <dxg:GridColumn FieldName="CreatedAt"  Visible="False" ShowInColumnChooser="False"/>
+                <dxg:GridColumn FieldName="UpdatedAt"  Visible="False" ShowInColumnChooser="False"/>
+                <dxg:GridColumn FieldName="Terminus" Visible="False" ShowInColumnChooser="False"/>
+                <!--<dxg:GridColumn FieldName="CreatedBy" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>
+                <dxg:GridColumn FieldName="UpdatedBy" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>-->
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView ShowFixedTotalSummary="True" AutoWidth="True"  AllowEditing="False" ShowAutoFilterRow="True"/>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

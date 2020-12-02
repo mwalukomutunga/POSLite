@@ -1,0 +1,448 @@
+﻿<UserControl x:Class="POSLite.Client.Views.Sales"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:POSLite.Client.Views" Background="GhostWhite" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:local1="clr-namespace:POSLite.Client.ViewModels" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" >
+
+
+    <UserControl.Resources>
+        <CollectionViewSource  x:Key="Customers" Source="{Binding CustomerData}"/>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
+            <Setter Property="Background" Value="LightSeaGreen" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="MinHeight" Value="60" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                            </Grid>
+                        </Border>
+                        <!--<ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightGreen" />
+                                <Setter Property="Foreground" Value="White" />
+                               
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="DodgerBlue" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>-->
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGreen" />
+                    <Setter Property="Foreground" Value="White" />
+
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="DodgerBlue" />
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ShortCutButtons"  TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="MinHeight" Value="35" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderBrush="LightGray" BorderThickness="1"  Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="DodgerBlue" />
+                                <Setter Property="Foreground" Value="White" />
+
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="OrangeRed" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SearchButton" TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
+            <Setter Property="Background" Value="DeepSkyBlue" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Padding" Value="5"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="DodgerBlue" />
+                                <Setter Property="Foreground" Value="White" />
+
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="OrangeRed" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="PriceTemplate">
+            <dxlc:LayoutControl Orientation="Vertical"  VerticalAlignment="Top" MinWidth="300">
+                <dxlc:LayoutItem Label="Price:">
+                    <dxe:TextEdit Text="{Binding SelectedObject.Price, UpdateSourceTrigger=PropertyChanged}"/>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutControl>
+        </DataTemplate>
+        <DataTemplate x:Key="DiscountTemplate">
+            <dxlc:LayoutControl Orientation="Vertical"  VerticalAlignment="Top" MinWidth="300">
+                <dxlc:LayoutItem Label="Discount:">
+                    <dxe:TextEdit Text="{Binding SelectedObject.Discount, UpdateSourceTrigger=PropertyChanged}"/>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutControl>
+        </DataTemplate>
+        <DataTemplate x:Key="QtyTemplate">
+            <dxlc:LayoutControl Orientation="Vertical"  VerticalAlignment="Top" MinWidth="300">
+                <dxlc:LayoutItem Label="Price:">
+                    <dxe:TextEdit Text="{Binding SelectedObject.Qty, UpdateSourceTrigger=PropertyChanged}"/>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutControl>
+        </DataTemplate>
+        <DataTemplate x:Key="CustomerTemplate">
+            <dxlc:LayoutControl Orientation="Vertical"  VerticalAlignment="Top" MinWidth="300">
+                <dxlc:LayoutItem Label="Customer:">
+                    <dxg:LookUpEdit AutoPopulateColumns="False"  ItemsSource="{Binding Source={StaticResource Customers}}"  DisplayMember="FullName" ValueMember="CustomerID"  EditValue="{Binding Path=CustomerId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <dxg:LookUpEdit.PopupContentTemplate>
+                            <ControlTemplate>
+                                <dxg:GridControl Name="PART_GridControl">
+                                    <dxg:GridControl.Columns>
+                                        <dxg:GridColumn FieldName="FullName" />
+                                        <dxg:GridColumn FieldName="CurrentBalance" />
+                                    </dxg:GridControl.Columns>
+                                    <dxg:GridControl.View>
+                                        <dxg:TableView  AutoWidth="True" AllowBestFit="True" ShowAutoFilterRow="True"/>
+                                    </dxg:GridControl.View>
+                                </dxg:GridControl>
+                            </ControlTemplate>
+                        </dxg:LookUpEdit.PopupContentTemplate>
+                    </dxg:LookUpEdit>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutControl>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <UserControl.DataContext>
+        <local1:SalesViewModel/>
+    </UserControl.DataContext>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService/>
+        <dxmvvm:DispatcherService />
+        <dx:DialogService x:Name="DialogService" DialogWindowStartupLocation="CenterOwner" ViewTemplate="{StaticResource PriceTemplate}">
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="Window">
+                    <Setter Property="SizeToContent" Value="WidthAndHeight" />
+                    <Setter Property="WindowStyle" Value="ToolWindow" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+        <dx:DialogService x:Name="DiscountService" DialogWindowStartupLocation="CenterOwner" ViewTemplate="{StaticResource DiscountTemplate}">
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="Window">
+                    <Setter Property="SizeToContent" Value="WidthAndHeight" />
+                    <Setter Property="WindowStyle" Value="ToolWindow" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+        <dx:DialogService x:Name="DialogService1"  DialogWindowStartupLocation="CenterOwner" ViewTemplate="{StaticResource QtyTemplate}">
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="Window">
+                    <Setter Property="SizeToContent" Value="WidthAndHeight" />
+                    <Setter Property="WindowStyle" Value="ToolWindow" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+        <dx:DialogService x:Name="CustomerService"  DialogWindowStartupLocation="CenterOwner" ViewTemplate="{StaticResource CustomerTemplate}">
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="Window">
+                    <Setter Property="SizeToContent" Value="WidthAndHeight" />
+                    <Setter Property="WindowStyle" Value="ToolWindow" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+    </dxmvvm:Interaction.Behaviors>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Content="Scan Barcode.." FontSize="17"/>
+                <TextBox x:Name="Barcode" Text="{Binding barCodeText, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,10,0"  Grid.Row="1" Grid.Column="0" FontSize="25">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" 
+                        Command="{Binding ScanCommand}"
+                        CommandParameter="{Binding ElementName=Barcode, Path=Text}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Content="Quantity" FontSize="17"/>
+                <TextBox x:Name="Quantity" Margin="10,0,10,0" Grid.Row="1" Grid.Column="1" FontSize="25"/>
+                <Button  Grid.Row="1" Grid.Column="2" MaxHeight="45" Margin="10,0,10,0" Style="{StaticResource SearchButton}" FontSize="25">Search</Button>
+                <!--items-->
+
+                <dxg:GridControl  Margin="0,10,10,0" SelectionMode="Row"  ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" ShowBorder="True" ShowLoadingPanel="False" Grid.RowSpan="2"  Grid.Row="2" Grid.ColumnSpan="3"  SelectedItem="{Binding SelectedObject,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding ItemCollection,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="AddNew" IsFilterEnabled="False">
+                    <dxg:GridControl.Columns>
+                        <!--<dxg:GridColumn FieldName="ID"  AllowEditing="False"/>-->
+                        <dxg:GridColumn FieldName="Description" MinWidth="200" Header="Item Info" AllowEditing="False"/>
+                        <dxg:GridColumn FieldName="Qty" AllowEditing="True">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:SpinEditSettings  MinValue="1" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn FieldName="Price" AllowEditing="True">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:SpinEditSettings  MinValue="1" DisplayFormat="c2"/>
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+                        <!--<dxg:GridColumn FieldName="VAT" AllowEditing="False">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:SpinEditSettings  DisplayFormat="c2"/>
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>-->
+                        <dxg:GridColumn FieldName="Discount" AllowEditing="True">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:SpinEditSettings  MinValue="0" DisplayFormat="c2" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn FieldName="Total"  AllowEditing="False">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:SpinEditSettings  MinValue="0" DisplayFormat="c2" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+                    </dxg:GridControl.Columns>
+                    <dxg:GridControl.View>
+                        <dxg:TableView AllowSorting="False" AllowColumnFiltering="False" ShowFixedTotalSummary="False" ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" NavigationStyle="Cell" ShowGroupPanel="False" AutoWidth="True"  AllowEditing="True" ShowAutoFilterRow="False">
+                            <dxmvvm:Interaction.Behaviors>
+                                <dxmvvm:EventToCommand Command="{Binding CellValueChangedCommand}"
+                                               EventName="CellValueChanged">
+                                    <dxmvvm:EventToCommand.EventArgsConverter>
+                                        <dx:EventArgsToDataCellConverter/>
+                                    </dxmvvm:EventToCommand.EventArgsConverter>
+                                </dxmvvm:EventToCommand>
+                            </dxmvvm:Interaction.Behaviors>
+                        </dxg:TableView>
+                    </dxg:GridControl.View>
+                </dxg:GridControl>
+                <!--Buttons-->
+                <UniformGrid Columns="6" Grid.Row="4" Grid.ColumnSpan="3" Margin="0,0,10,0">
+                    <Button Margin="0,2,10,0" Command="{Binding DeleteCommand}"  Height="40">
+                        <StackPanel HorizontalAlignment="Center">
+                            <Path Width="25" Height="24" Margin="0,0,0,5"  Stretch="Fill" Fill="LightCoral" HorizontalAlignment="Center"  Data="M285,256l72.5-84.2c7.9-9.2,6.9-23-2.3-31c-9.2-7.9-23-6.9-30.9,2.3L256,222.4l-68.2-79.2c-7.9-9.2-21.8-10.2-31-2.3c-9.2,7.9-10.2,21.8-2.3,31L227,256l-72.5,84.2c-7.9,9.2-6.9,23,2.3,31c4.1,3.6,9.2,5.3,14.3,5.3c6.2,0,12.3-2.6,16.6-7.6l68.2-79.2l68.2,79.2c4.3,5,10.5,7.6,16.6,7.6c5.1,0,10.2-1.7,14.3-5.3c9.2-7.9,10.2-21.8,2.3-31L285,256z"/>
+                            <TextBlock Text="Delete"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="0,2,10,0"  Command="{Binding DiscountCommand}"   Height="40">
+                        <StackPanel HorizontalAlignment="Center">
+                            <iconPacks:PackIconMaterial  Width="25" Height="24" Margin="0,0,0,5" Foreground="LightCoral" HorizontalAlignment="Center" Kind="CashMinus" />
+                            <TextBlock Text="Discount"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="0,2,10,0" Command="{Binding AddQtyCommand}" Height="40">
+                        <StackPanel HorizontalAlignment="Center">
+                            <iconPacks:PackIconMaterial Width="25" Height="24"  Margin="0,0,0,5" Foreground="LightCoral" HorizontalAlignment="Center" Kind="Plus" />
+
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="0,2,10,0"  Command="{Binding DeductQtyCommand}"  Height="40">
+                        <StackPanel HorizontalAlignment="Center">
+                            <iconPacks:PackIconMaterial Width="25" Height="24"  Margin="0,0,0,5" Foreground="LightCoral" HorizontalAlignment="Center" Kind="Minus" />
+
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="0,2,10,0" Command="{Binding ChangeQtyCommand}"  Height="40">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Change"  Margin="0,0,0,5"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Quantity"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="0,2,0,0" Command="{Binding ChangePriceCommand}"  Height="40">
+                        <StackPanel HorizontalAlignment="Center">
+                            <iconPacks:PackIconMaterial  Width="25" Height="24" Margin="0,0,0,5" Foreground="LightCoral" HorizontalAlignment="Center" Kind="Cash" />
+                            <TextBlock Text="Price"/>
+                        </StackPanel>
+                    </Button>
+                </UniformGrid>
+            </Grid>
+            <Grid Grid.Column="3" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid  Grid.Row="0" Margin="0,30,0,0" Background="Black">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="0,7" Grid.ColumnSpan="2" Grid.Row="0"  Foreground="White"  Grid.Column="1" FontSize="20" DockPanel.Dock="Left" Text="Sub Total"/>
+                    <TextBlock Margin="0,7" Grid.Column="3" Grid.Row="0" FontSize="20" Foreground="White" DockPanel.Dock="Right" Text="{Binding SubTotal,StringFormat='n2'}"/>
+                    <TextBlock Margin="0,7" Grid.ColumnSpan="2" Grid.Row="1"  Foreground="White"  Grid.Column="1" FontSize="20" DockPanel.Dock="Left" Text="Discount"/>
+                    <TextBlock Margin="0,7" Grid.Column="3" Grid.Row="1" FontSize="20" Foreground="White" DockPanel.Dock="Right" Text="{Binding TotalDiscount,StringFormat='n2'}"/>
+                    <TextBlock Margin="0,7" Grid.ColumnSpan="2" Grid.Row="2"  Foreground="White"  Grid.Column="1" FontSize="20" DockPanel.Dock="Left" Text="VAT"/>
+                    <TextBlock Margin="0,7" Grid.Column="3" Grid.Row="2" FontSize="20" Foreground="White" DockPanel.Dock="Right" Text="{Binding TotalVAT,StringFormat='n2'}"/>
+                    <TextBlock Margin="0,7" Grid.ColumnSpan="2" Grid.Row="3"  Foreground="White"  Grid.Column="1" FontSize="20" DockPanel.Dock="Left" Text="Grand Total"/>
+                    <TextBlock Margin="0,7" Grid.Column="3" Grid.Row="3" FontSize="20" Foreground="White" DockPanel.Dock="Right" Text="{Binding Total,StringFormat='n2'}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Margin="0,10" Command="{Binding SaveInvoiceCommand}" FontSize="25"  Grid.Row="0" >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <iconPacks:PackIconMaterial VerticalAlignment="Center" Width="35" Height="32" Margin="10,0" Kind="CashUsdOutline" />
+                            <TextBlock FontSize="30" VerticalAlignment="Center"  Text="Checkout"/>
+                        </StackPanel>
+                    </Button>
+                    <UniformGrid VerticalAlignment="Top" Columns="4" Grid.Row="1">
+                        <Button Margin="0,2,10,0" Command="{Binding VoidInvoiceCommand}"  Height="40">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="Void"/>
+                                <TextBlock Text="Invoice"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="0,2,10,0" Background="LightCoral"  Height="40">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="On"/>
+                                <TextBlock Text="Hold"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="0,2,10,0"   Height="40">
+                            <StackPanel Orientation="Horizontal">
+                                <iconPacks:PackIconMaterial  Width="25" Height="24" Margin="0,0,10,0" HorizontalAlignment="Center" Kind="SettingsHelper" />
+                                <TextBlock Text="Options"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="0,2,10,0" Background="YellowGreen"  Height="40">TS</Button>
+                    </UniformGrid>
+                    <Grid Grid.Row="2"  Height="150" VerticalAlignment="Bottom">
+                        <Border BorderThickness="0"/>
+                        <dxlc:LayoutControl>
+                            <dx:DXTabControl >
+                                <dx:DXTabItem Header="Customer Information">
+                                    <DockPanel>
+                                        <DockPanel DockPanel.Dock="Left">
+                                            <Label FontSize="15" DockPanel.Dock="Top" Content="{Binding Customer.FullName}"/>
+                                            <DockPanel>
+                                                <Label Content="Balance :" FontWeight="Bold"/>
+                                                <Label Margin="5,0,0,0" Content="{Binding Customer.CurrentBalance, StringFormat='c2'}"/>
+                                            </DockPanel>
+                                        </DockPanel>
+                                        <dx:SimpleButton DockPanel.Dock="Right" Command="{Binding ChangeCustomerCommand}" Content="Change customer" Margin="10,0,0,0" Height="40"/>
+                                    </DockPanel>
+                                    
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="Customer Notes">
+                                    <DockPanel>
+                                        <Label Content="{Binding Customer.OtherDetails}"/>
+                                    </DockPanel>
+                                </dx:DXTabItem>
+                            </dx:DXTabControl>
+
+                        </dxlc:LayoutControl>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <UniformGrid Grid.Row="1" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Columns="8">
+            <Button Style="{StaticResource ShortCutButtons}">Items</Button>
+            <Button Style="{StaticResource ShortCutButtons}">Category</Button>
+            <Button Style="{StaticResource ShortCutButtons}">Brand</Button>
+            <Button Style="{StaticResource ShortCutButtons}">Balances</Button>
+            <Button Style="{StaticResource ShortCutButtons}">Day Report</Button>
+            <Button Style="{StaticResource ShortCutButtons}">Payments</Button>
+            <Button Style="{StaticResource ShortCutButtons}">Returns</Button>
+            <Button Style="{StaticResource ShortCutButtons}">inventory</Button>
+            <Button Style="{StaticResource ShortCutButtons}">Outlets</Button>
+            <Button Style="{StaticResource ShortCutButtons}">Roles</Button>
+            <Button Style="{StaticResource ShortCutButtons}">My Roles</Button>
+            <Button Style="{StaticResource ShortCutButtons}">New Item</Button>
+            <Button Style="{StaticResource ShortCutButtons}">Brand</Button>
+            <Button Style="{StaticResource ShortCutButtons}">Stock</Button>
+            <Button Style="{StaticResource ShortCutButtons}">Ctl+5</Button>
+            <Button Style="{StaticResource ShortCutButtons}">log out</Button>
+
+        </UniformGrid>
+    </Grid>
+</UserControl>

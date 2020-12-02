@@ -1,0 +1,60 @@
+﻿<dx:ThemedWindow  xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POSLite.Client.Views"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:local1="clr-namespace:POSLite.Client.ViewModels" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" x:Class="POSLite.Client.Views.MainView"
+        mc:Ignorable="d"
+        Title="Master POS"  WindowKind="Ribbon"  WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <dx:ThemedWindow.DataContext>
+        <local1:MainViewModel/>
+    </dx:ThemedWindow.DataContext>
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:WindowService/>
+    </dxmvvm:Interaction.Behaviors>
+
+    <dxlc:TileLayoutControl  AllowItemMoving="False" dxlc:DockLayoutControl.Dock="Client" HorizontalAlignment="Center"  Orientation="Vertical">
+        <dxlc:Tile Header="Items" Size="Large" FontSize="15" Command="{Binding NavCommand}" CommandParameter="Items">
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center"  Source="/Images/product-lauch.png"/>
+            </dxlc:Tile>
+        <dxlc:Tile Header="Customers" Command="{Binding NavCommand}" CommandParameter="Customers" Background="Purple" FontSize="15" VerticalHeaderAlignment="Center" HorizontalHeaderAlignment="Center" Size="Small">
+                <!--<Image HorizontalAlignment="Center"  VerticalAlignment="Center"  Source="/Images/icons8-customer-64.png"/>-->
+            </dxlc:Tile>
+        <dxlc:Tile Header="Users"  Command="{Binding NavCommand}" CommandParameter="Users" HorizontalHeaderAlignment="Center"  FontSize="15" VerticalHeaderAlignment="Center" Size="Small">
+                <!--<Image HorizontalAlignment="Center"  VerticalAlignment="Center"  Source="/Images/icons8-user-folder-16.png"/>-->
+            </dxlc:Tile>
+        <dxlc:Tile Header="Opening stock"  Command="{Binding NavCommand}" CommandParameter="Inventory"  FontSize="15">
+            <Image HorizontalAlignment="Center"  VerticalAlignment="Center"  Source="/Images/boxes.png"/>
+            </dxlc:Tile>
+        <dxlc:Tile  Header="Inventory Adjustment" Command="{Binding NavCommand}" CommandParameter="InventoryAdjustment" FontSize="15">
+                <Image HorizontalAlignment="Center"   VerticalAlignment="Center"  Source="/Images/order.png"/>
+            </dxlc:Tile>
+        <dxlc:Tile  Header="Category" Command="{Binding NavCommand}" CommandParameter="Category"  FontSize="15" VerticalHeaderAlignment="Center" HorizontalHeaderAlignment="Center" Background="Brown" Size="Small">
+                <!--<Image HorizontalAlignment="Center"  VerticalAlignment="Center"  Source="/Images/icons8-sorting-64.png"/>-->
+            </dxlc:Tile>
+            <dxlc:Tile  Header="Balances" Size="ExtraSmall" />
+            <dxlc:Tile  Header="Balances" Size="ExtraSmall" />
+            <dxlc:Tile  Header="Balances" Size="ExtraSmall" />
+            <dxlc:Tile  Header="Balances" Size="ExtraSmall" />
+        <dxlc:Tile  FontSize="15" Header="Brands"  Command="{Binding NavCommand}" CommandParameter="Brands">
+            <Image HorizontalAlignment="Center"   VerticalAlignment="Center"  Source="/Images/brand.png"/>
+            </dxlc:Tile>
+        <dxlc:Tile Size="Small" FontSize="15" Header="Company"  Command="{Binding NavCommand}" CommandParameter="Company" >
+                <Image HorizontalAlignment="Center"   VerticalAlignment="Center"  Source="/Images/product-return.png"/>
+            </dxlc:Tile>
+        <dxlc:Tile Size="Small" Background="Orange" FontSize="15" VerticalHeaderAlignment="Center" HorizontalHeaderAlignment="Center" Header="Cost Center" Command="{Binding NavCommand}" CommandParameter="CostCenter">
+                <!--<Image HorizontalAlignment="Center"   VerticalAlignment="Center"  Source="/Images/icons8-business-report-48.png"/>-->
+            </dxlc:Tile>
+        <dxlc:Tile  Header="Sales" Background="Green" Command="{Binding NavCommand}" CommandParameter="Sales" FontSize="15">
+                <Image HorizontalAlignment="Center"   VerticalAlignment="Center"  Source="/Images/sale-sign.png"/>
+            </dxlc:Tile>
+        <dxlc:Tile  Command="{Binding NavCommand}" CommandParameter="Transactions" HorizontalHeaderAlignment="Center"  FontSize="15" VerticalHeaderAlignment="Center"  Header="Transactions" Size="Small">
+                <!--<Image HorizontalAlignment="Center"   VerticalAlignment="Center"  Source="/Images/icons8-split-transaction-64.png"/>-->
+            </dxlc:Tile>
+        <dxlc:Tile  HorizontalHeaderAlignment="Center" Command="{Binding NavCommand}" CommandParameter="UOM" FontSize="15" VerticalHeaderAlignment="Center" Header="UOM" Size="Small">
+                <!--<Image HorizontalAlignment="Center"   VerticalAlignment="Center"  Source="/Images/icons8-unit-48.png"/>-->
+            </dxlc:Tile>
+        </dxlc:TileLayoutControl>
+   
+    </dx:ThemedWindow>
