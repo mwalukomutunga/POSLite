@@ -1,5 +1,7 @@
-﻿using DevExpress.Mvvm;
+﻿using Autofac;
+using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
+using POSLite.Client.Classes;
 using POSLite.Domain;
 using System;
 using System.Collections.Generic;
@@ -25,8 +27,10 @@ namespace POSLite.Client.ViewModels
             get { return _Collection; }
             set { SetValue(ref _Collection, value); RaisePropertyChanged(); }
         }
+        public ILifetimeScope Container { get; private set; }
         public SalesViewModel()
         {
+            Container = DependencyContainer.Container;
             ItemCollection = new ObservableCollection<OrderItem>();
             CustomerData = new ObservableCollection<Customer>(unitOfWork.CustomerRepository.Get());
             try
@@ -226,9 +230,8 @@ namespace POSLite.Client.ViewModels
             
         }
         [Command]
-        public async void SaveInvoice()
+        public  void SaveInvoice()
         {
-            
             unitOfWork.SalesRepository.SaveSale(new Order
             {
                 OrderId= OrderId,
@@ -241,6 +244,7 @@ namespace POSLite.Client.ViewModels
                 OrderAmount = SubTotal,
                 TotalAmount= Total
             },ItemCollection.ToList());
+            
         }
     }
 }

@@ -24,6 +24,8 @@ namespace POSLite.Domain
         private float _Vat;
         [Display(AutoGenerateField = false)]
         [Key]
+        public Guid Id { get; set; }
+        [Display(AutoGenerateField = false)]
         public Guid OrderId { get; set; }
         [Display(AutoGenerateField = false)]
         public Order Order { get; set; }

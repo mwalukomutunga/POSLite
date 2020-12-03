@@ -14,6 +14,7 @@ namespace POSLite.Domain
             CreatedAt = IDateTime.Now();
             UpdatedAt = IDateTime.Now();
             Terminus = Environment.MachineName;
+            IsActive = true;
             //  CreatedBy = null;
             // UpdatedBy = null;
         }
@@ -24,14 +25,18 @@ namespace POSLite.Domain
 
         [Display(GroupName = "<1>", Name = "Name")]
         public string Name { get; set; }
-        public bool IsActive { get; set; }
+       
         [LayoutControlEditor(TemplateKey = "CostCenterlookUp")]
-        [Display(GroupName = "<1>", Name = "PIN")]
+        [Display(GroupName = "<1>", Name = "CostCenter")]
         public Guid CostCenterId { get; set; }
         [Display(AutoGenerateField = false)]
         public SalesOutlet CostCenter { get; set; }
+        [Display(GroupName = "<2>", Name = "PIN")]
         public long UserName { get; set; }
+
+        [Display(GroupName = "<2>", Name = "Password")]
         public string Password { get; set; }
+        public bool IsActive { get; set; }
         [Display(AutoGenerateField = false)]
         public string ConfirmPassword { get; set; }
     }

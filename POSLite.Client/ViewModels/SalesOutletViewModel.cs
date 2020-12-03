@@ -15,7 +15,7 @@ namespace POSLite.Client.ViewModels
         public SalesOutletViewModel()
         {
             CompanyData = new ObservableCollection<Company>(unitOfWork.CompanyRepository.Get());
-            SelectedObject = new SalesOutlet() { SalesOutletId = new Guid(), CompanyId= CompanyData.FirstOrDefault().ID };
+            if(CompanyData.Count != 0) SelectedObject = new SalesOutlet() { SalesOutletId = new Guid(), CompanyId= CompanyData.FirstOrDefault().ID };
             GridCollection = new ObservableCollection<object>(unitOfWork.SalesOutletRepository.Get());
         }
         public ObservableCollection<Company> CompanyData { get; set; }
