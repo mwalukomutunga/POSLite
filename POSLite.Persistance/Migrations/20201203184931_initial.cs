@@ -400,6 +400,11 @@ namespace POSLite.Persistance.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "CustomerId", "AmountOfLastDeposit", "CreatedAt", "CurrentBalance", "DateOfBirth", "DateOfLastDeposit", "FullName", "Gender", "OtherDetails", "Terminus", "UpdatedAt" },
+                values: new object[] { new Guid("a8e6b7af-963b-4345-8101-fc1c5349ebf6"), 0f, new DateTime(2020, 12, 3, 21, 49, 30, 589, DateTimeKind.Utc).AddTicks(2103), 0f, new DateTime(1970, 12, 3, 21, 49, 30, 589, DateTimeKind.Utc).AddTicks(2046), new DateTime(2020, 12, 3, 21, 49, 30, 589, DateTimeKind.Utc).AddTicks(2118), "Walkin Customer", 2, "Anonymous customer", "DESKTOP-V84PPA9", new DateTime(2020, 12, 3, 21, 49, 30, 589, DateTimeKind.Utc).AddTicks(3008) });
+
             migrationBuilder.CreateIndex(
                 name: "IX_InventoryAdjustment_CostCenterId",
                 table: "InventoryAdjustment",

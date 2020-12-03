@@ -10,6 +10,7 @@ namespace POSLite.Domain
     {
         public UnitOfMeasurement()
         {
+            ID = Guid.NewGuid();
             CreatedAt = IDateTime.Now();
             UpdatedAt = IDateTime.Now();
             Terminus = Environment.MachineName;

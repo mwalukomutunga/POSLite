@@ -11,7 +11,6 @@ namespace POSLite.Domain
     {
         public Item()
         {
-           
             CreatedAt = IDateTime.Now();
             UpdatedAt = IDateTime.Now();
             Terminus = Environment.MachineName;

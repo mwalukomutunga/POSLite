@@ -71,7 +71,7 @@
         <dxlc:DataLayoutControl Grid.Row="1" CurrentItem="{Binding SelectedObject}">
             <dxlc:DataLayoutControl.Resources>
                 <DataTemplate x:Key="lookUpTemplate">
-                    <dxg:LookUpEdit  ItemsSource="{Binding Source={StaticResource CategoryData}}"  DisplayMember="Name" ValueMember="CategoryID"  EditValue="{Binding Path=CategoryId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <dxg:LookUpEdit  ItemsSource="{Binding Source={StaticResource CategoryData}}"  DisplayMember="Name" ValueMember="CategoryId"  EditValue="{Binding Path=CategoryId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <dxg:LookUpEdit.PopupContentTemplate>
                             <ControlTemplate>
                                 <dxg:GridControl Name="PART_GridControl">
@@ -88,7 +88,7 @@
                     </dxg:LookUpEdit>
                 </DataTemplate>
                 <DataTemplate x:Key="BrandlookUp">
-                    <dxg:LookUpEdit  ItemsSource="{Binding Source={StaticResource Brands}}"  DisplayMember="Name" ValueMember="BrandID"  EditValue="{Binding Path=BrandId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <dxg:LookUpEdit  ItemsSource="{Binding Source={StaticResource Brands}}"  DisplayMember="Name" ValueMember="BrandId"  EditValue="{Binding Path=BrandId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <dxg:LookUpEdit.PopupContentTemplate>
                             <ControlTemplate>
                                 <dxg:GridControl Name="PART_GridControl">
@@ -139,12 +139,12 @@
                 
                 <dxg:GridColumn FieldName="CategoryId" Header="Category">
                     <dxg:GridColumn.EditSettings>
-                        <dxg:LookUpEditSettings  ItemsSource="{Binding Source={StaticResource CategoryData}}"  DisplayMember="Name" ValueMember="CategoryID"/>
+                        <dxg:LookUpEditSettings  ItemsSource="{Binding Source={StaticResource CategoryData}}"  DisplayMember="Name" ValueMember="CategoryId"/>
                     </dxg:GridColumn.EditSettings>
                 </dxg:GridColumn>
                 <dxg:GridColumn FieldName="BrandId" Header="Brand">
                     <dxg:GridColumn.EditSettings>
-                        <dxg:LookUpEditSettings  ItemsSource="{Binding Source={StaticResource Brands}}"   DisplayMember="Name" ValueMember="BrandID"/>
+                        <dxg:LookUpEditSettings  ItemsSource="{Binding Source={StaticResource Brands}}"   DisplayMember="Name" ValueMember="BrandId"/>
                     </dxg:GridColumn.EditSettings>
                 </dxg:GridColumn>
                 <dxg:GridColumn FieldName="UOMCodeId" Header="UOM">

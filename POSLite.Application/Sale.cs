@@ -27,7 +27,8 @@ namespace POSLite.App
             try
             {
                 var lastRecord = query.Where(x => x.CreatedAt == query.Max(x => x.CreatedAt)).FirstOrDefault();
-                result =$"INV{ (Convert.ToInt32(lastRecord.OrderNo[3..]) +1).ToString().PadLeft(4, '0')}";
+                if(lastRecord !=null)
+                    result =$"INV{ (Convert.ToInt32(lastRecord.OrderNo[3..]) +1).ToString().PadLeft(4, '0')}";
             }
             catch (Exception)
             {
@@ -52,9 +53,9 @@ namespace POSLite.App
                     await transaction.CommitAsync();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                
                 return false;
             }
             return true;

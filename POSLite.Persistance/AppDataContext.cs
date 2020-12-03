@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using POSLite.Domain;
+using POSLite.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,5 +35,26 @@ namespace POSLite.Persistance
         public DbSet<UnitOfMeasurement> UnitOfMeasurements { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<ItemCategory> ItemCategory { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>().HasData(
+                  new Customer
+                 {
+                     CustomerId = Guid.NewGuid(),
+                     FullName = "Walkin Customer",
+                     Gender = Domain.Enums.Gender.Unknown,
+                     AmountOfLastDeposit = 0,
+                     CurrentBalance = 0,
+                     DateOfBirth = IDateTime.Now().AddYears(-50),
+                     CreatedAt = IDateTime.Now(),
+                     DateOfLastDeposit = IDateTime.Now(),
+                     OtherDetails = "Anonymous customer",
+                     Terminus = Environment.MachineName,
+                     UpdatedAt = IDateTime.Now(),
+                 }
+                );
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

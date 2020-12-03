@@ -116,6 +116,22 @@ namespace POSLite.Persistance.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerId = new Guid("a8e6b7af-963b-4345-8101-fc1c5349ebf6"),
+                            AmountOfLastDeposit = 0f,
+                            CreatedAt = new DateTime(2020, 12, 3, 21, 49, 30, 589, DateTimeKind.Utc).AddTicks(2103),
+                            CurrentBalance = 0f,
+                            DateOfBirth = new DateTime(1970, 12, 3, 21, 49, 30, 589, DateTimeKind.Utc).AddTicks(2046),
+                            DateOfLastDeposit = new DateTime(2020, 12, 3, 21, 49, 30, 589, DateTimeKind.Utc).AddTicks(2118),
+                            FullName = "Walkin Customer",
+                            Gender = 2,
+                            OtherDetails = "Anonymous customer",
+                            Terminus = "DESKTOP-V84PPA9",
+                            UpdatedAt = new DateTime(2020, 12, 3, 21, 49, 30, 589, DateTimeKind.Utc).AddTicks(3008)
+                        });
                 });
 
             modelBuilder.Entity("POSLite.Domain.InventoryAdjustment", b =>

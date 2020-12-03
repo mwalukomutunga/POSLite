@@ -29,9 +29,13 @@ namespace POSLite.Client.ViewModels
         {
             ItemCollection = new ObservableCollection<OrderItem>();
             CustomerData = new ObservableCollection<Customer>(unitOfWork.CustomerRepository.Get());
-            Customer = CustomerData.FirstOrDefault();
-            CustomerId = Customer.CustomerId;
-            OrderNo = unitOfWork.SalesRepository.GenerateOrderNo();
+            try
+            {
+                Customer = CustomerData.FirstOrDefault();
+                CustomerId = Customer.CustomerId;
+                OrderNo = unitOfWork.SalesRepository.GenerateOrderNo();
+            }
+            catch (Exception){}
         }
 
         public Guid OrderId { get; set; } = Guid.NewGuid();
@@ -222,7 +226,7 @@ namespace POSLite.Client.ViewModels
             
         }
         [Command]
-        public void SaveInvoice()
+        public async void SaveInvoice()
         {
             
             unitOfWork.SalesRepository.SaveSale(new Order
@@ -230,9 +234,9 @@ namespace POSLite.Client.ViewModels
                 OrderId= OrderId,
                 CustomerId = CustomerId,
                 OrderNo= OrderNo,
-                SalesOutlet=null,
-                Staff=null,
-                VAT=TotalVAT,
+                SalesOutletId = unitOfWork.SalesOutletRepository.Get().FirstOrDefault().SalesOutletId,
+                StaffId = unitOfWork.StaffRepo.Get().FirstOrDefault().StaffId,
+                VAT =TotalVAT,
                 Discount =TotalDiscount,
                 OrderAmount = SubTotal,
                 TotalAmount= Total
