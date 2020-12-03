@@ -11,14 +11,14 @@ namespace POSLite.Persistance
     {
         public AppDataContext(DbContextOptions<AppDataContext> options) : base(options)
         { }
-        //public AppDataContext() : base()
-        //{
+        public AppDataContext() : base()
+        {
 
-        //}
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlite("Data Source=POS.db");
-        //}
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=POS.db");
+        }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Company> Company { get; set; }
@@ -54,6 +54,9 @@ namespace POSLite.Persistance
                      UpdatedAt = IDateTime.Now(),
                  }
                 );
+            modelBuilder.Entity<Brand>().HasData(new Brand { Name="Unknown", BrandId=Guid.NewGuid() });
+            modelBuilder.Entity<ItemCategory>().HasData(new ItemCategory { CategoryId= Guid.NewGuid(), Name="Other",Description= "Other" });
+            modelBuilder.Entity<UnitOfMeasurement>().HasData(new UnitOfMeasurement { ID = Guid.NewGuid(), UOMCode="Each", UOMDescription = "Each" });
             base.OnModelCreating(modelBuilder);
         }
     }

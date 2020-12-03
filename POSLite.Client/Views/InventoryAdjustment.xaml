@@ -38,7 +38,7 @@
         <dxlc:DataLayoutControl Grid.Row="1" CurrentItem="{Binding SelectedObject}">
             <dxlc:DataLayoutControl.Resources>
                 <DataTemplate x:Key="ItemlookUp">
-                    <dxg:LookUpEdit  ItemsSource="{Binding Source={StaticResource ItemsData}}"  DisplayMember="Name" ValueMember="ItemID"  EditValue="{Binding Path=ItemId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <dxg:LookUpEdit  ItemsSource="{Binding Source={StaticResource ItemsData}}"  DisplayMember="Name" ValueMember="ItemId"  EditValue="{Binding Path=ItemId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <dxg:LookUpEdit.PopupContentTemplate>
                             <ControlTemplate>
                                 <dxg:GridControl Name="PART_GridControl">
@@ -56,7 +56,7 @@
                 </DataTemplate>
 
                 <DataTemplate x:Key="CostCenterlookUp">
-                    <dxg:LookUpEdit  ItemsSource="{Binding Source={StaticResource SalesOutletData}}"  DisplayMember="Name" ValueMember="SalesOutletID"  EditValue="{Binding Path=CostCenterId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <dxg:LookUpEdit  ItemsSource="{Binding Source={StaticResource SalesOutletData}}"  DisplayMember="Name" ValueMember="SalesOutletId"  EditValue="{Binding Path=CostCenterId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <dxg:LookUpEdit.PopupContentTemplate>
                             <ControlTemplate>
                                 <dxg:GridControl Name="PART_GridControl">
@@ -93,12 +93,12 @@
                 </dxg:GridColumn>
                 <dxg:GridColumn FieldName="ItemId" Header="Item">
                     <dxg:GridColumn.EditSettings>
-                        <dxg:LookUpEditSettings  ItemsSource="{Binding Source={StaticResource ItemsData}}" DisplayMember="Name" ValueMember="ItemID" />
+                        <dxg:LookUpEditSettings  ItemsSource="{Binding Source={StaticResource ItemsData}}" DisplayMember="Name" ValueMember="ItemId" />
                     </dxg:GridColumn.EditSettings>
                 </dxg:GridColumn>
                 <dxg:GridColumn FieldName="CostCenterId" Header="Cost Center">
                     <dxg:GridColumn.EditSettings>
-                        <dxg:LookUpEditSettings  ItemsSource="{Binding Source={StaticResource SalesOutletData}}"   DisplayMember="Name" ValueMember="SalesOutletID"/>
+                        <dxg:LookUpEditSettings  ItemsSource="{Binding Source={StaticResource SalesOutletData}}"   DisplayMember="Name" ValueMember="SalesOutletId"/>
                     </dxg:GridColumn.EditSettings>
                 </dxg:GridColumn>
                 <!--<dxg:GridColumn FieldName="CreatedBy" IsSmart="True" Visible="False" ShowInColumnChooser="False"/>

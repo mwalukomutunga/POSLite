@@ -14,11 +14,11 @@ namespace POSLite.Client.ViewModels
 
         public StaffViewModel()
         {
-           
+            SalesOutletData = new ObservableCollection<SalesOutlet>(unitOfWork.SalesOutletRepository.Get());
             SelectedObject = new Staff() { StaffId = new Guid() };
             GridCollection = new ObservableCollection<object>(unitOfWork.StaffRepo.Get());
         }
-
+        public ObservableCollection<SalesOutlet> SalesOutletData { get; set; }
         Staff _SelectedObject;
         public Staff SelectedObject
         {
