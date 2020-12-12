@@ -234,12 +234,12 @@ namespace POSLite.Client.ViewModels
             barCodeText = "";
         }
         [Command]
-        public  void SaveInvoice()
+        public async void SaveInvoice()
         {
             try
             {
                 if (ItemCollection.Count != 0)
-                    unitOfWork.SalesRepository.SaveSale(new Order
+                    if (await unitOfWork.SalesRepository.SaveSale(new Order
                     {
                         OrderId = OrderId,
                         CustomerId = CustomerId,
@@ -250,7 +250,10 @@ namespace POSLite.Client.ViewModels
                         Discount = TotalDiscount,
                         OrderAmount = SubTotal,
                         TotalAmount = Total
-                    }, ItemCollection.ToList());
+                    }, ItemCollection.ToList()))
+                    { 
+                        
+                    };
             }
             catch (Exception)
             {

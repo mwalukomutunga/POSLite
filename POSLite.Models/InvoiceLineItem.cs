@@ -26,6 +26,7 @@ namespace POSLite.Domain
         public string Name { get; set; }
         public float Qty { get; set; }
         public float Price { get; set; }
+        public float VAT { get; set; }
         public float Discount { get; set; }
         public float Total { get; set; }
     }

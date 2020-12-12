@@ -93,6 +93,7 @@ namespace POSLite.App
                     Name=item.Description,
                     Qty = item.Qty,
                     Price = item.Price,
+                    VAT = item.VAT,
                     Discount = item.Discount,
                     Total = item.Total
                 };
