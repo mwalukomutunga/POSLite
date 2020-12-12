@@ -11,15 +11,16 @@ namespace POSLite.Persistance
     {
         public AppDataContext(DbContextOptions<AppDataContext> options) : base(options)
         { }
-        //public AppDataContext() : base()
-        //{
+        public AppDataContext() : base()
+        {
 
-        //}
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlite("Data Source=POS.db");
-        //}
-
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=POS.db");
+        }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceLineItem> InvoiceLineItems { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Company> Company { get; set; }
         public DbSet<Item> Items { get; set; }

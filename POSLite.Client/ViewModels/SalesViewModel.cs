@@ -16,6 +16,7 @@ namespace POSLite.Client.ViewModels
 {
     public class SalesViewModel : BaseViewModel
     {
+        protected IWindowService WindowService { get { return this.GetService<IWindowService>(); } }
         protected IDialogService DialogService { get { return this.GetService<IDialogService>("DialogService"); } }
         protected IDialogService DialogService1 { get { return this.GetService<IDialogService>("DialogService1"); } }
         protected IDialogService DiscountService { get { return this.GetService<IDialogService>("DiscountService"); } }
@@ -227,24 +228,51 @@ namespace POSLite.Client.ViewModels
         [Command]
         public void VoidInvoice()
         {
-            
+            ItemCollection = new ObservableCollection<OrderItem>();
+            OrderId = Guid.NewGuid();
+            SelectedObject = null;
+            barCodeText = "";
         }
         [Command]
         public  void SaveInvoice()
         {
-            unitOfWork.SalesRepository.SaveSale(new Order
+            try
             {
-                OrderId= OrderId,
-                CustomerId = CustomerId,
-                OrderNo= OrderNo,
-                SalesOutletId = unitOfWork.SalesOutletRepository.Get().FirstOrDefault().SalesOutletId,
-                StaffId = unitOfWork.StaffRepo.Get().FirstOrDefault().StaffId,
-                VAT =TotalVAT,
-                Discount =TotalDiscount,
-                OrderAmount = SubTotal,
-                TotalAmount= Total
-            },ItemCollection.ToList());
-            
+                if (ItemCollection.Count != 0)
+                    unitOfWork.SalesRepository.SaveSale(new Order
+                    {
+                        OrderId = OrderId,
+                        CustomerId = CustomerId,
+                        OrderNo = OrderNo,
+                        SalesOutletId = unitOfWork.SalesOutletRepository.Get().FirstOrDefault().SalesOutletId,
+                        StaffId = unitOfWork.StaffRepo.Get().FirstOrDefault().StaffId,
+                        VAT = TotalVAT,
+                        Discount = TotalDiscount,
+                        OrderAmount = SubTotal,
+                        TotalAmount = Total
+                    }, ItemCollection.ToList());
+            }
+            catch (Exception)
+            {
+
+
+            }
+            finally
+            {
+                ClearFields();
+            }
+
+           
         }
+
+        private void ClearFields()
+        {
+            ItemCollection = new ObservableCollection<OrderItem>();
+            OrderNo = unitOfWork.SalesRepository.GenerateOrderNo();
+            OrderId = Guid.NewGuid();
+            SelectedObject = null;
+            barCodeText = "";
+        }
+
     }
 }

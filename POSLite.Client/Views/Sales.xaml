@@ -178,6 +178,7 @@
     </UserControl.DataContext>
     <dxmvvm:Interaction.Behaviors>
         <dx:DXMessageBoxService/>
+        <dxmvvm:WindowService/>
         <dxmvvm:DispatcherService />
         <dx:DialogService x:Name="DialogService" DialogWindowStartupLocation="CenterOwner" ViewTemplate="{StaticResource PriceTemplate}">
             <dx:DialogService.DialogStyle>
@@ -341,7 +342,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid  Grid.Row="0" Margin="0,30,0,0" Background="Black">
+                <Grid  Grid.Row="0" Margin="0,30,0,0" Background="#464d35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="*"/>

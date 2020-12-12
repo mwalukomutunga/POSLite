@@ -11,7 +11,15 @@
         <local1:MainViewModel/>
     </dx:ThemedWindow.DataContext>
     <dxmvvm:Interaction.Behaviors>
-        <dxmvvm:WindowService/>
+        <dxmvvm:WindowService AllowSetWindowOwner="True"
+                                  WindowStartupLocation="CenterOwner">
+            <dxmvvm:WindowService.WindowStyle>
+                <Style TargetType="dx:ThemedWindow">
+                    <Setter Property="Width" Value="900" />
+                    <!--<Setter Property="Height" Value="300" />-->
+                </Style>
+            </dxmvvm:WindowService.WindowStyle>
+        </dxmvvm:WindowService>
     </dxmvvm:Interaction.Behaviors>
 
     <dxlc:TileLayoutControl  AllowItemMoving="False" dxlc:DockLayoutControl.Dock="Client" HorizontalAlignment="Center"  Orientation="Vertical">
@@ -33,7 +41,7 @@
         <dxlc:Tile  Header="Category" Command="{Binding NavCommand}" CommandParameter="Category"  FontSize="15" VerticalHeaderAlignment="Center" HorizontalHeaderAlignment="Center" Background="Brown" Size="Small">
                 <!--<Image HorizontalAlignment="Center"  VerticalAlignment="Center"  Source="/Images/icons8-sorting-64.png"/>-->
             </dxlc:Tile>
-            <dxlc:Tile  Header="Balances" Size="ExtraSmall" />
+        <dxlc:Tile  Header="Pay Type" Size="ExtraSmall" Command="{Binding NavCommand}" CommandParameter="PayMethods" />
             <dxlc:Tile  Header="Balances" Size="ExtraSmall" />
             <dxlc:Tile  Header="Balances" Size="ExtraSmall" />
             <dxlc:Tile  Header="Balances" Size="ExtraSmall" />
@@ -49,7 +57,7 @@
         <dxlc:Tile  Header="Sales" Background="Green" Command="{Binding NavCommand}" CommandParameter="Sales" FontSize="15">
                 <Image HorizontalAlignment="Center"   VerticalAlignment="Center"  Source="/Images/sale-sign.png"/>
             </dxlc:Tile>
-        <dxlc:Tile  Command="{Binding NavCommand}" CommandParameter="Transactions" HorizontalHeaderAlignment="Center"  FontSize="15" VerticalHeaderAlignment="Center"  Header="Transactions" Size="Small">
+        <dxlc:Tile  Command="{Binding NavCommand}" CommandParameter="Payments" HorizontalHeaderAlignment="Center"  FontSize="15" VerticalHeaderAlignment="Center" Background="BlueViolet" Header="Payments" Size="Small">
                 <!--<Image HorizontalAlignment="Center"   VerticalAlignment="Center"  Source="/Images/icons8-split-transaction-64.png"/>-->
             </dxlc:Tile>
         <dxlc:Tile  HorizontalHeaderAlignment="Center" Command="{Binding NavCommand}" CommandParameter="UOM" FontSize="15" VerticalHeaderAlignment="Center" Header="UOM" Size="Small">

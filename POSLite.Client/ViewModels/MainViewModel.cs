@@ -9,7 +9,7 @@ using System.Text;
 
 namespace POSLite.Client.ViewModels
 {
-    public enum DocumentType { Items, Customers,Category, Users, Inventory, Orders, Brands, Reports, Sales, Transactions, UOM,InventoryAdjustment, Company, CostCenter }
+    public enum DocumentType { Items, Customers,Category, Users, Inventory, Orders, Brands, Reports, Sales, Transactions, UOM,InventoryAdjustment, Company, CostCenter,Payments,PayMethods }
     public class MainViewModel : ViewModelBase
     {
         protected IWindowService WindowService { get { return this.GetService<IWindowService>(); } }
@@ -54,6 +54,8 @@ namespace POSLite.Client.ViewModels
                         break;
                     case DocumentType.Sales:
                         WindowService.Show("Sales", scope.Resolve<SalesViewModel>());
+                        WindowService.Title = "Sales";
+                        WindowService.WindowState = DXWindowState.Maximized;
                         break;
                     case DocumentType.Transactions:
                         break;
@@ -65,6 +67,14 @@ namespace POSLite.Client.ViewModels
                         break;
                     case DocumentType.Company:
                         WindowService.Show("Company", scope.Resolve<CompanyViewModel>());
+                        break;
+                    case DocumentType.Payments:
+                        WindowService.Show("Payments", scope.Resolve<PaymentsViewModel>());
+                        WindowService.Title = "Payments";
+                        break;
+                    case DocumentType.PayMethods:
+                        WindowService.Show("PaymentMethod", scope.Resolve<PaymentMethodViewModel>());
+                        WindowService.Title = "Payment Methods";
                         break;
                     default:
                         break;

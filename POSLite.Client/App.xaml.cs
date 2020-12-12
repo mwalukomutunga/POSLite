@@ -16,8 +16,10 @@ namespace POSLite.Client
     {
         //protected override void OnStartup(StartupEventArgs e)
         //{
-        //    ApplicationThemeHelper.ApplicationThemeName = Theme.Office2010SilverName;
+            
         //    base.OnStartup(e);
+        //   // ApplicationThemeHelper.ApplicationThemeName = Theme.Default;
+        //   // ThemeManager.Current.ChangeTheme(this, "Dark.Green");
         //}
     }
 }

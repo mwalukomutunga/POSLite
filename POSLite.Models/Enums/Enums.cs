@@ -10,6 +10,12 @@ namespace POSLite.Domain.Enums
         Female,
         Unknown
     }
+    public enum PaymentStatus
+    {
+        Completed,
+        Cancelled,
+        Disputed
+    }
     public interface IDateTime
     {
         static DateTime Now() { return DateTime.UtcNow.AddHours(3); }

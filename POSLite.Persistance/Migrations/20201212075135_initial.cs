@@ -53,7 +53,8 @@ namespace POSLite.Persistance.Migrations
                     FullName = table.Column<string>(nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
                     Gender = table.Column<int>(nullable: false),
-                    CurrentBalance = table.Column<float>(nullable: false),
+                    Address = table.Column<string>(nullable: true),
+                    CurrentBalance = table.Column<decimal>(nullable: false),
                     DateOfLastDeposit = table.Column<DateTime>(nullable: false),
                     AmountOfLastDeposit = table.Column<float>(nullable: false),
                     OtherDetails = table.Column<string>(nullable: true)
@@ -190,10 +191,10 @@ namespace POSLite.Persistance.Migrations
                     UpdatedAt = table.Column<DateTime>(nullable: false),
                     Terminus = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    IsActive = table.Column<bool>(nullable: false),
                     CostCenterId = table.Column<Guid>(nullable: false),
                     UserName = table.Column<long>(nullable: false),
                     Password = table.Column<string>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false),
                     ConfirmPassword = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -296,6 +297,47 @@ namespace POSLite.Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Invoices",
+                columns: table => new
+                {
+                    InvoiceId = table.Column<Guid>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
+                    Terminus = table.Column<string>(nullable: true),
+                    InvoiceNo = table.Column<string>(nullable: true),
+                    CustomerId = table.Column<Guid>(nullable: false),
+                    InvoiceDate = table.Column<DateTime>(nullable: false),
+                    SalesOutletId = table.Column<Guid>(nullable: false),
+                    StaffId = table.Column<Guid>(nullable: false),
+                    VAT = table.Column<float>(nullable: false),
+                    Discount = table.Column<float>(nullable: false),
+                    InvoiceAmount = table.Column<float>(nullable: false),
+                    TotalAmount = table.Column<float>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invoices", x => x.InvoiceId);
+                    table.ForeignKey(
+                        name: "FK_Invoices_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Invoices_SalesOutlets_SalesOutletId",
+                        column: x => x.SalesOutletId,
+                        principalTable: "SalesOutlets",
+                        principalColumn: "SalesOutletId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Invoices_Staff_StaffId",
+                        column: x => x.StaffId,
+                        principalTable: "Staff",
+                        principalColumn: "StaffId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -337,24 +379,57 @@ namespace POSLite.Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderItems",
+                name: "InvoiceLineItems",
                 columns: table => new
                 {
-                    OrderId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false),
                     Terminus = table.Column<string>(nullable: true),
-                    OrderId1 = table.Column<Guid>(nullable: true),
+                    ItemId = table.Column<Guid>(nullable: false),
+                    InvoiceId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Qty = table.Column<float>(nullable: false),
+                    Price = table.Column<float>(nullable: false),
+                    Discount = table.Column<float>(nullable: false),
+                    Total = table.Column<float>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InvoiceLineItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InvoiceLineItems_Invoices_InvoiceId",
+                        column: x => x.InvoiceId,
+                        principalTable: "Invoices",
+                        principalColumn: "InvoiceId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InvoiceLineItems_Items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Items",
+                        principalColumn: "ItemId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderItems",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
+                    Terminus = table.Column<string>(nullable: true),
+                    OrderId = table.Column<Guid>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     ItemId = table.Column<Guid>(nullable: false),
-                    Qty = table.Column<int>(nullable: false),
+                    Qty = table.Column<float>(nullable: false),
                     Discount = table.Column<float>(nullable: false),
                     Price = table.Column<float>(nullable: false),
                     VAT = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderItems", x => x.OrderId);
+                    table.PrimaryKey("PK_OrderItems", x => x.Id);
                     table.ForeignKey(
                         name: "FK_OrderItems_Items_ItemId",
                         column: x => x.ItemId,
@@ -362,11 +437,11 @@ namespace POSLite.Persistance.Migrations
                         principalColumn: "ItemId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderItems_Orders_OrderId1",
-                        column: x => x.OrderId1,
+                        name: "FK_OrderItems_Orders_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "OrderId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -380,12 +455,20 @@ namespace POSLite.Persistance.Migrations
                     PaymentMethodID = table.Column<Guid>(nullable: true),
                     TransactionOrderId = table.Column<Guid>(nullable: true),
                     PaymentAmount = table.Column<float>(nullable: false),
+                    CustomerId = table.Column<Guid>(nullable: false),
                     OtherDetails = table.Column<string>(nullable: true),
-                    PaymentDate = table.Column<DateTime>(nullable: false)
+                    PaymentDate = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payments", x => x.PaymentId);
+                    table.ForeignKey(
+                        name: "FK_Payments_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Payments_PaymentMethods_PaymentMethodID",
                         column: x => x.PaymentMethodID,
@@ -403,22 +486,22 @@ namespace POSLite.Persistance.Migrations
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "BrandId", "CreatedAt", "Name", "Terminus", "UpdatedAt" },
-                values: new object[] { new Guid("5dcbd447-af87-457a-99f7-b62bb215c1fc"), new DateTime(2020, 12, 3, 23, 51, 16, 986, DateTimeKind.Utc).AddTicks(6485), "Unknown", "DESKTOP-V84PPA9", new DateTime(2020, 12, 3, 23, 51, 16, 986, DateTimeKind.Utc).AddTicks(6490) });
+                values: new object[] { new Guid("8a4b2223-2100-4200-b3a2-b7e7caec025c"), new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(5958), "Unknown", "DESKTOP-V84PPA9", new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(5964) });
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "CustomerId", "AmountOfLastDeposit", "CreatedAt", "CurrentBalance", "DateOfBirth", "DateOfLastDeposit", "FullName", "Gender", "OtherDetails", "Terminus", "UpdatedAt" },
-                values: new object[] { new Guid("f90879ce-9d68-48a6-aa00-0ef7e1efafaf"), 0f, new DateTime(2020, 12, 3, 23, 51, 16, 984, DateTimeKind.Utc).AddTicks(2330), 0f, new DateTime(1970, 12, 3, 23, 51, 16, 984, DateTimeKind.Utc).AddTicks(2273), new DateTime(2020, 12, 3, 23, 51, 16, 984, DateTimeKind.Utc).AddTicks(2345), "Walkin Customer", 2, "Anonymous customer", "DESKTOP-V84PPA9", new DateTime(2020, 12, 3, 23, 51, 16, 984, DateTimeKind.Utc).AddTicks(3235) });
+                columns: new[] { "CustomerId", "Address", "AmountOfLastDeposit", "CreatedAt", "CurrentBalance", "DateOfBirth", "DateOfLastDeposit", "FullName", "Gender", "OtherDetails", "Terminus", "UpdatedAt" },
+                values: new object[] { new Guid("dc2b26e5-828d-4aac-b4b2-1ed3adec151e"), null, 0f, new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6356), 0m, new DateTime(1970, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6335), new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6361), "Walkin Customer", 2, "Anonymous customer", "DESKTOP-V84PPA9", new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(7009) });
 
             migrationBuilder.InsertData(
                 table: "ItemCategory",
                 columns: new[] { "CategoryId", "CreatedAt", "Description", "Name", "Terminus", "UpdatedAt" },
-                values: new object[] { new Guid("91da765d-6f8a-43cb-bdc6-be8b72567094"), new DateTime(2020, 12, 3, 23, 51, 16, 987, DateTimeKind.Utc).AddTicks(484), "Other", "Other", "DESKTOP-V84PPA9", new DateTime(2020, 12, 3, 23, 51, 16, 987, DateTimeKind.Utc).AddTicks(490) });
+                values: new object[] { new Guid("120a6d1f-2ee0-4599-a575-34af95767cbd"), new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(7490), "Other", "Other", "DESKTOP-V84PPA9", new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(7490) });
 
             migrationBuilder.InsertData(
                 table: "UnitOfMeasurements",
                 columns: new[] { "ID", "CreatedAt", "Terminus", "UOMCode", "UOMDescription", "UpdatedAt" },
-                values: new object[] { new Guid("16b71f08-da80-44f4-88c1-bf0f7d5aea93"), new DateTime(2020, 12, 3, 23, 51, 16, 987, DateTimeKind.Utc).AddTicks(6550), "DESKTOP-V84PPA9", "Each", "Each", new DateTime(2020, 12, 3, 23, 51, 16, 987, DateTimeKind.Utc).AddTicks(6555) });
+                values: new object[] { new Guid("1af2581b-6423-4408-a953-7fa943306c57"), new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(9860), "DESKTOP-V84PPA9", "Each", "Each", new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(9860) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_InventoryAdjustment_CostCenterId",
@@ -429,6 +512,31 @@ namespace POSLite.Persistance.Migrations
                 name: "IX_InventoryAdjustment_ItemId",
                 table: "InventoryAdjustment",
                 column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InvoiceLineItems_InvoiceId",
+                table: "InvoiceLineItems",
+                column: "InvoiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InvoiceLineItems_ItemId",
+                table: "InvoiceLineItems",
+                column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invoices_CustomerId",
+                table: "Invoices",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invoices_SalesOutletId",
+                table: "Invoices",
+                column: "SalesOutletId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invoices_StaffId",
+                table: "Invoices",
+                column: "StaffId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemInventories_CostCenterId",
@@ -466,9 +574,9 @@ namespace POSLite.Persistance.Migrations
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderItems_OrderId1",
+                name: "IX_OrderItems_OrderId",
                 table: "OrderItems",
-                column: "OrderId1");
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
@@ -484,6 +592,11 @@ namespace POSLite.Persistance.Migrations
                 name: "IX_Orders_StaffId",
                 table: "Orders",
                 column: "StaffId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payments_CustomerId",
+                table: "Payments",
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_PaymentMethodID",
@@ -512,6 +625,9 @@ namespace POSLite.Persistance.Migrations
                 name: "InventoryAdjustment");
 
             migrationBuilder.DropTable(
+                name: "InvoiceLineItems");
+
+            migrationBuilder.DropTable(
                 name: "ItemInventories");
 
             migrationBuilder.DropTable(
@@ -522,6 +638,9 @@ namespace POSLite.Persistance.Migrations
 
             migrationBuilder.DropTable(
                 name: "Payments");
+
+            migrationBuilder.DropTable(
+                name: "Invoices");
 
             migrationBuilder.DropTable(
                 name: "Items");

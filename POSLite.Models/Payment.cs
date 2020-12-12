@@ -20,15 +20,15 @@ namespace POSLite.Domain
         [Display(AutoGenerateField = false)]
         [Key] 
         public Guid PaymentId { get; set; }
-        [Display(GroupName = "<1>", Name = "PaymentMethod")]
         public PaymentMethod PaymentMethod { get; set; }
-        [Display(GroupName = "<1>", Name = "Transaction")]
         public Order Transaction { get; set; }
-        [Display(GroupName = "<2>", Name = "PaymentAmount")]
         public float PaymentAmount { get; set; }
-        [Display(GroupName = "<2>", Name = "OtherDetails")]
+
+        public Guid CustomerId { get; set; }
+        public Customer Customer { get; set; }
         public string OtherDetails { get; set; }
         [Display(AutoGenerateField = false)]
         public DateTime PaymentDate { get; set; }
+        public PaymentStatus Status { get; set; }
     }
 }

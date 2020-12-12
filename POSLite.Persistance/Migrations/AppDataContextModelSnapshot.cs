@@ -41,11 +41,11 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            BrandId = new Guid("5dcbd447-af87-457a-99f7-b62bb215c1fc"),
-                            CreatedAt = new DateTime(2020, 12, 3, 23, 51, 16, 986, DateTimeKind.Utc).AddTicks(6485),
+                            BrandId = new Guid("8a4b2223-2100-4200-b3a2-b7e7caec025c"),
+                            CreatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(5958),
                             Name = "Unknown",
                             Terminus = "DESKTOP-V84PPA9",
-                            UpdatedAt = new DateTime(2020, 12, 3, 23, 51, 16, 986, DateTimeKind.Utc).AddTicks(6490)
+                            UpdatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(5964)
                         });
                 });
 
@@ -93,14 +93,17 @@ namespace POSLite.Persistance.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
                     b.Property<float>("AmountOfLastDeposit")
                         .HasColumnType("REAL");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("CurrentBalance")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("CurrentBalance")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
@@ -130,17 +133,17 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            CustomerId = new Guid("f90879ce-9d68-48a6-aa00-0ef7e1efafaf"),
+                            CustomerId = new Guid("dc2b26e5-828d-4aac-b4b2-1ed3adec151e"),
                             AmountOfLastDeposit = 0f,
-                            CreatedAt = new DateTime(2020, 12, 3, 23, 51, 16, 984, DateTimeKind.Utc).AddTicks(2330),
-                            CurrentBalance = 0f,
-                            DateOfBirth = new DateTime(1970, 12, 3, 23, 51, 16, 984, DateTimeKind.Utc).AddTicks(2273),
-                            DateOfLastDeposit = new DateTime(2020, 12, 3, 23, 51, 16, 984, DateTimeKind.Utc).AddTicks(2345),
+                            CreatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6356),
+                            CurrentBalance = 0m,
+                            DateOfBirth = new DateTime(1970, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6335),
+                            DateOfLastDeposit = new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6361),
                             FullName = "Walkin Customer",
                             Gender = 2,
                             OtherDetails = "Anonymous customer",
                             Terminus = "DESKTOP-V84PPA9",
-                            UpdatedAt = new DateTime(2020, 12, 3, 23, 51, 16, 984, DateTimeKind.Utc).AddTicks(3235)
+                            UpdatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(7009)
                         });
                 });
 
@@ -178,6 +181,104 @@ namespace POSLite.Persistance.Migrations
                     b.HasIndex("ItemId");
 
                     b.ToTable("InventoryAdjustment");
+                });
+
+            modelBuilder.Entity("POSLite.Domain.Invoice", b =>
+                {
+                    b.Property<Guid>("InvoiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("Discount")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("InvoiceAmount")
+                        .HasColumnType("REAL");
+
+                    b.Property<DateTime>("InvoiceDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("InvoiceNo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("SalesOutletId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("StaffId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Terminus")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("TotalAmount")
+                        .HasColumnType("REAL");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("VAT")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("InvoiceId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("SalesOutletId");
+
+                    b.HasIndex("StaffId");
+
+                    b.ToTable("Invoices");
+                });
+
+            modelBuilder.Entity("POSLite.Domain.InvoiceLineItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("Discount")
+                        .HasColumnType("REAL");
+
+                    b.Property<Guid>("InvoiceId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Qty")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Terminus")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("Total")
+                        .HasColumnType("REAL");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("InvoiceLineItems");
                 });
 
             modelBuilder.Entity("POSLite.Domain.Item", b =>
@@ -270,12 +371,12 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            CategoryId = new Guid("91da765d-6f8a-43cb-bdc6-be8b72567094"),
-                            CreatedAt = new DateTime(2020, 12, 3, 23, 51, 16, 987, DateTimeKind.Utc).AddTicks(484),
+                            CategoryId = new Guid("120a6d1f-2ee0-4599-a575-34af95767cbd"),
+                            CreatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(7490),
                             Description = "Other",
                             Name = "Other",
                             Terminus = "DESKTOP-V84PPA9",
-                            UpdatedAt = new DateTime(2020, 12, 3, 23, 51, 16, 987, DateTimeKind.Utc).AddTicks(490)
+                            UpdatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(7490)
                         });
                 });
 
@@ -416,7 +517,7 @@ namespace POSLite.Persistance.Migrations
 
             modelBuilder.Entity("POSLite.Domain.OrderItem", b =>
                 {
-                    b.Property<Guid>("OrderId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
@@ -432,14 +533,14 @@ namespace POSLite.Persistance.Migrations
                     b.Property<Guid>("ItemId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("OrderId1")
+                    b.Property<Guid>("OrderId")
                         .HasColumnType("TEXT");
 
                     b.Property<float>("Price")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("Qty")
-                        .HasColumnType("INTEGER");
+                    b.Property<float>("Qty")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Terminus")
                         .HasColumnType("TEXT");
@@ -450,11 +551,11 @@ namespace POSLite.Persistance.Migrations
                     b.Property<float>("VAT")
                         .HasColumnType("REAL");
 
-                    b.HasKey("OrderId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ItemId");
 
-                    b.HasIndex("OrderId1");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderItems");
                 });
@@ -466,6 +567,9 @@ namespace POSLite.Persistance.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("OtherDetails")
@@ -480,6 +584,9 @@ namespace POSLite.Persistance.Migrations
                     b.Property<Guid?>("PaymentMethodID")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Terminus")
                         .HasColumnType("TEXT");
 
@@ -490,6 +597,8 @@ namespace POSLite.Persistance.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("PaymentId");
+
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("PaymentMethodID");
 
@@ -632,12 +741,12 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("16b71f08-da80-44f4-88c1-bf0f7d5aea93"),
-                            CreatedAt = new DateTime(2020, 12, 3, 23, 51, 16, 987, DateTimeKind.Utc).AddTicks(6550),
+                            ID = new Guid("1af2581b-6423-4408-a953-7fa943306c57"),
+                            CreatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(9860),
                             Terminus = "DESKTOP-V84PPA9",
                             UOMCode = "Each",
                             UOMDescription = "Each",
-                            UpdatedAt = new DateTime(2020, 12, 3, 23, 51, 16, 987, DateTimeKind.Utc).AddTicks(6555)
+                            UpdatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(9860)
                         });
                 });
 
@@ -646,6 +755,42 @@ namespace POSLite.Persistance.Migrations
                     b.HasOne("POSLite.Domain.SalesOutlet", "CostCenter")
                         .WithMany()
                         .HasForeignKey("CostCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("POSLite.Domain.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("POSLite.Domain.Invoice", b =>
+                {
+                    b.HasOne("POSLite.Domain.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("POSLite.Domain.SalesOutlet", "SalesOutlet")
+                        .WithMany()
+                        .HasForeignKey("SalesOutletId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("POSLite.Domain.Staff", "Staff")
+                        .WithMany()
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("POSLite.Domain.InvoiceLineItem", b =>
+                {
+                    b.HasOne("POSLite.Domain.Invoice", "Invoice")
+                        .WithMany()
+                        .HasForeignKey("InvoiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -732,11 +877,19 @@ namespace POSLite.Persistance.Migrations
 
                     b.HasOne("POSLite.Domain.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderId1");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("POSLite.Domain.Payment", b =>
                 {
+                    b.HasOne("POSLite.Domain.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("POSLite.Domain.PaymentMethod", "PaymentMethod")
                         .WithMany()
                         .HasForeignKey("PaymentMethodID");

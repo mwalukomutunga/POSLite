@@ -18,7 +18,7 @@ namespace POSLite.Domain
             //  CreatedBy = null;
             // UpdatedBy = null;
         }
-        private int qty;
+        private float qty;
         private float price;
         private float discount;
         private float _Vat;
@@ -35,7 +35,7 @@ namespace POSLite.Domain
         public Guid ItemId { get; set; }
         [Display(AutoGenerateField = false)]
         public Item Item { get; set; }
-        public int Qty { get => qty; set { qty = value; HandleItemChange(); NotifyPropertyChanged(); } }
+        public float Qty { get => qty; set { qty = value; HandleItemChange(); NotifyPropertyChanged(); } }
         public float Discount { get => discount; set { discount = value; HandleItemChange(); NotifyPropertyChanged(); } }
         public float Price { get => price; set { price = value; HandleItemChange(); NotifyPropertyChanged(); } }
         [Display(AutoGenerateField = false)]
