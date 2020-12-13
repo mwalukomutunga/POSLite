@@ -1,4 +1,5 @@
-﻿using POSLite.Domain.Enums;
+﻿using DevExpress.Mvvm.DataAnnotations;
+using POSLite.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,5 +26,8 @@ namespace POSLite.Domain
         public string PaymentMethodName { get; set; }
         [Display(GroupName = "<2>", Name = "Method Description")]
         public string PaymentMethodDescription { get; set; }
+        [LayoutControlEditor(TemplateKey = "IconTemplate")]
+        [Display(GroupName = "<2>", Name = "Icon")]
+        public byte[] Icon { get; set; }
     }
 }

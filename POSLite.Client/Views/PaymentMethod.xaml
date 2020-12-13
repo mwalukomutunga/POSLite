@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:POSLite.Client.Views" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:local1="clr-namespace:POSLite.Client.ViewModels" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-                  mc:Ignorable="d"
+        xmlns:local="clr-namespace:POSLite.Client.Views" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:local1="clr-namespace:POSLite.Client.ViewModels" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+              mc:Ignorable="d"
     >
     <UserControl.DataContext>
         <local1:PaymentMethodViewModel/>
@@ -32,7 +32,13 @@
             <dxb:BarButtonItem  Command="{Binding DeleteCommand}" x:Name="btnDel" Content="Delete" BarItemDisplayMode="ContentAndGlyph" Glyph="{dx:DXImage Image=delete_16x16.png}"/>
             <dxb:BarItemSeparator />
         </dxb:ToolBarControl>
-        <dxlc:DataLayoutControl Grid.Row="1" CurrentItem="{Binding SelectedObject}"/>
+        <dxlc:DataLayoutControl Grid.Row="1" CurrentItem="{Binding SelectedObject}">
+            <dxlc:DataLayoutControl.Resources>
+                <DataTemplate x:Key="IconTemplate">
+                    <dxe:ImageEdit MaxHeight="80"  EditValue="{Binding Icon}" />
+                </DataTemplate>
+            </dxlc:DataLayoutControl.Resources>
+        </dxlc:DataLayoutControl>
 
         <dxg:GridControl Grid.Row="2"  SelectedItem="{Binding SelectedObject}"  ItemsSource="{Binding GridCollection}" AutoGenerateColumns="AddNew">
             <!--<dxg:GridControl.TotalSummary>

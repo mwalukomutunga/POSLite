@@ -21,6 +21,7 @@ namespace POSLite.Domain
         [Key]
         public Guid BrandId { get; set; }
         [Display(GroupName = "<Brand>", Name = "Name")]
+        [Required]
         public string Name { get; set; }
     }
 }

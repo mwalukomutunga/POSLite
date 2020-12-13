@@ -238,21 +238,26 @@ namespace POSLite.Client.ViewModels
         {
             try
             {
+                var order = new Order
+                {
+                    OrderId = OrderId,
+                    CustomerId = CustomerId,
+                    OrderNo = OrderNo,
+                    SalesOutletId = unitOfWork.SalesOutletRepository.Get().FirstOrDefault().SalesOutletId,
+                    StaffId = unitOfWork.StaffRepo.Get().FirstOrDefault().StaffId,
+                    VAT = TotalVAT,
+                    Discount = TotalDiscount,
+                    OrderAmount = SubTotal,
+                    TotalAmount = Total
+                };
+                var invoice = await unitOfWork.SalesRepository.SaveSale(order, ItemCollection.ToList());
                 if (ItemCollection.Count != 0)
-                    if (await unitOfWork.SalesRepository.SaveSale(new Order
+                    if (invoice !=null)
                     {
-                        OrderId = OrderId,
-                        CustomerId = CustomerId,
-                        OrderNo = OrderNo,
-                        SalesOutletId = unitOfWork.SalesOutletRepository.Get().FirstOrDefault().SalesOutletId,
-                        StaffId = unitOfWork.StaffRepo.Get().FirstOrDefault().StaffId,
-                        VAT = TotalVAT,
-                        Discount = TotalDiscount,
-                        OrderAmount = SubTotal,
-                        TotalAmount = Total
-                    }, ItemCollection.ToList()))
-                    { 
-                        
+                        var modal = Container.Resolve<PaymentsViewModel>();
+                        modal.Invoice = invoice;
+                        WindowService.Show("Payments", modal, Total,null);
+                       
                     };
             }
             catch (Exception)

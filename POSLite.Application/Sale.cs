@@ -11,7 +11,7 @@ namespace POSLite.App
     public interface ISaleRepository
     {
         string GenerateOrderNo();
-        Task<bool> SaveSale(Order order, List<OrderItem> items);
+        Task<Invoice> SaveSale(Order order, List<OrderItem> items);
     }
     public class SaleRepository : ISaleRepository
     {
@@ -28,7 +28,25 @@ namespace POSLite.App
             {
                 var lastRecord = query.Where(x => x.CreatedAt == query.Max(x => x.CreatedAt)).FirstOrDefault();
                 if(lastRecord !=null)
-                    result =$"INV{ (Convert.ToInt32(lastRecord.OrderNo[3..]) +1).ToString().PadLeft(4, '0')}";
+                    result =$"OR{ (Convert.ToInt32(lastRecord.OrderNo[3..]) +1).ToString().PadLeft(4, '0')}";
+            }
+            catch (Exception)
+            {
+
+                result = "OR0001";
+            }
+
+            return result;// (lastRecord != null) ? $"INV{str+1}" : "INV001";
+        }
+        private string GenerateInvoiceNo()
+        {
+            string result = "";
+            IQueryable<Invoice> query = context.Set<Invoice>();
+            try
+            {
+                var lastRecord = query.Where(x => x.CreatedAt == query.Max(x => x.CreatedAt)).FirstOrDefault();
+                if (lastRecord != null)
+                    result = $"INV{ (Convert.ToInt32(lastRecord.InvoiceNo[3..]) + 1).ToString().PadLeft(4, '0')}";
             }
             catch (Exception)
             {
@@ -38,15 +56,15 @@ namespace POSLite.App
 
             return result;// (lastRecord != null) ? $"INV{str+1}" : "INV001";
         }
-
-        async System.Threading.Tasks.Task<bool> ISaleRepository.SaveSale(Order order, List<OrderItem> items)
+        async System.Threading.Tasks.Task<Invoice> ISaleRepository.SaveSale(Order order, List<OrderItem> items)
         {
+            Invoice invoice;
             try
             {
-                var invoice = new Invoice
+                 invoice = new Invoice
                 {
                     InvoiceId = Guid.NewGuid(),
-                    InvoiceNo = order.OrderNo,
+                    InvoiceNo = GenerateInvoiceNo(),
                     CustomerId = order.CustomerId,
                     SalesOutletId = order.SalesOutletId,
                     StaffId = order.StaffId,
@@ -78,9 +96,9 @@ namespace POSLite.App
             catch (Exception ex)
             {
                 
-                return false;
+                return null;
             }
-            return true;
+            return invoice;
         }
         private IEnumerable<InvoiceLineItem> LoadItems(Invoice invoice, List<OrderItem> items)
         {

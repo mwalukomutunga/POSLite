@@ -9,7 +9,7 @@ using POSLite.Persistance;
 namespace POSLite.Persistance.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20201212075135_initial")]
+    [Migration("20201213075920_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,11 +43,11 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            BrandId = new Guid("8a4b2223-2100-4200-b3a2-b7e7caec025c"),
-                            CreatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(5958),
+                            BrandId = new Guid("dbc00528-46b5-4769-b4f9-f6c685188511"),
+                            CreatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 93, DateTimeKind.Utc).AddTicks(8852),
                             Name = "Unknown",
                             Terminus = "DESKTOP-V84PPA9",
-                            UpdatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(5964)
+                            UpdatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 93, DateTimeKind.Utc).AddTicks(8857)
                         });
                 });
 
@@ -135,17 +135,17 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            CustomerId = new Guid("dc2b26e5-828d-4aac-b4b2-1ed3adec151e"),
+                            CustomerId = new Guid("4042d8cc-a2d3-4cd6-9e82-f2d37a2156e2"),
                             AmountOfLastDeposit = 0f,
-                            CreatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6356),
+                            CreatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8786),
                             CurrentBalance = 0m,
-                            DateOfBirth = new DateTime(1970, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6335),
-                            DateOfLastDeposit = new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6361),
+                            DateOfBirth = new DateTime(1970, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8761),
+                            DateOfLastDeposit = new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8792),
                             FullName = "Walkin Customer",
                             Gender = 2,
                             OtherDetails = "Anonymous customer",
                             Terminus = "DESKTOP-V84PPA9",
-                            UpdatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(7009)
+                            UpdatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(9444)
                         });
                 });
 
@@ -274,6 +274,9 @@ namespace POSLite.Persistance.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<float>("VAT")
+                        .HasColumnType("REAL");
+
                     b.HasKey("Id");
 
                     b.HasIndex("InvoiceId");
@@ -373,12 +376,12 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            CategoryId = new Guid("120a6d1f-2ee0-4599-a575-34af95767cbd"),
-                            CreatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(7490),
+                            CategoryId = new Guid("7ddb7b7a-5ab3-4a0d-becf-fadf37cf4f58"),
+                            CreatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(414),
                             Description = "Other",
                             Name = "Other",
                             Terminus = "DESKTOP-V84PPA9",
-                            UpdatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(7490)
+                            UpdatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(419)
                         });
                 });
 
@@ -618,6 +621,9 @@ namespace POSLite.Persistance.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<byte[]>("Icon")
+                        .HasColumnType("BLOB");
+
                     b.Property<string>("PaymentMethodCode")
                         .HasColumnType("TEXT");
 
@@ -743,12 +749,12 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("1af2581b-6423-4408-a953-7fa943306c57"),
-                            CreatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(9860),
+                            ID = new Guid("a96936af-be25-4ff1-b0d1-0ba8395bd44b"),
+                            CreatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(2815),
                             Terminus = "DESKTOP-V84PPA9",
                             UOMCode = "Each",
                             UOMDescription = "Each",
-                            UpdatedAt = new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(9860)
+                            UpdatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(2820)
                         });
                 });
 

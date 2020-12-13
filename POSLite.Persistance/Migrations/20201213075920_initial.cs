@@ -90,7 +90,8 @@ namespace POSLite.Persistance.Migrations
                     Terminus = table.Column<string>(nullable: true),
                     PaymentMethodCode = table.Column<string>(nullable: true),
                     PaymentMethodName = table.Column<string>(nullable: true),
-                    PaymentMethodDescription = table.Column<string>(nullable: true)
+                    PaymentMethodDescription = table.Column<string>(nullable: true),
+                    Icon = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -391,6 +392,7 @@ namespace POSLite.Persistance.Migrations
                     Name = table.Column<string>(nullable: true),
                     Qty = table.Column<float>(nullable: false),
                     Price = table.Column<float>(nullable: false),
+                    VAT = table.Column<float>(nullable: false),
                     Discount = table.Column<float>(nullable: false),
                     Total = table.Column<float>(nullable: false)
                 },
@@ -486,22 +488,22 @@ namespace POSLite.Persistance.Migrations
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "BrandId", "CreatedAt", "Name", "Terminus", "UpdatedAt" },
-                values: new object[] { new Guid("8a4b2223-2100-4200-b3a2-b7e7caec025c"), new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(5958), "Unknown", "DESKTOP-V84PPA9", new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(5964) });
+                values: new object[] { new Guid("dbc00528-46b5-4769-b4f9-f6c685188511"), new DateTime(2020, 12, 13, 10, 59, 20, 93, DateTimeKind.Utc).AddTicks(8852), "Unknown", "DESKTOP-V84PPA9", new DateTime(2020, 12, 13, 10, 59, 20, 93, DateTimeKind.Utc).AddTicks(8857) });
 
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "CustomerId", "Address", "AmountOfLastDeposit", "CreatedAt", "CurrentBalance", "DateOfBirth", "DateOfLastDeposit", "FullName", "Gender", "OtherDetails", "Terminus", "UpdatedAt" },
-                values: new object[] { new Guid("dc2b26e5-828d-4aac-b4b2-1ed3adec151e"), null, 0f, new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6356), 0m, new DateTime(1970, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6335), new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(6361), "Walkin Customer", 2, "Anonymous customer", "DESKTOP-V84PPA9", new DateTime(2020, 12, 12, 10, 51, 34, 773, DateTimeKind.Utc).AddTicks(7009) });
+                values: new object[] { new Guid("4042d8cc-a2d3-4cd6-9e82-f2d37a2156e2"), null, 0f, new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8786), 0m, new DateTime(1970, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8761), new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8792), "Walkin Customer", 2, "Anonymous customer", "DESKTOP-V84PPA9", new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(9444) });
 
             migrationBuilder.InsertData(
                 table: "ItemCategory",
                 columns: new[] { "CategoryId", "CreatedAt", "Description", "Name", "Terminus", "UpdatedAt" },
-                values: new object[] { new Guid("120a6d1f-2ee0-4599-a575-34af95767cbd"), new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(7490), "Other", "Other", "DESKTOP-V84PPA9", new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(7490) });
+                values: new object[] { new Guid("7ddb7b7a-5ab3-4a0d-becf-fadf37cf4f58"), new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(414), "Other", "Other", "DESKTOP-V84PPA9", new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(419) });
 
             migrationBuilder.InsertData(
                 table: "UnitOfMeasurements",
                 columns: new[] { "ID", "CreatedAt", "Terminus", "UOMCode", "UOMDescription", "UpdatedAt" },
-                values: new object[] { new Guid("1af2581b-6423-4408-a953-7fa943306c57"), new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(9860), "DESKTOP-V84PPA9", "Each", "Each", new DateTime(2020, 12, 12, 10, 51, 34, 774, DateTimeKind.Utc).AddTicks(9860) });
+                values: new object[] { new Guid("a96936af-be25-4ff1-b0d1-0ba8395bd44b"), new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(2815), "DESKTOP-V84PPA9", "Each", "Each", new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(2820) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_InventoryAdjustment_CostCenterId",
