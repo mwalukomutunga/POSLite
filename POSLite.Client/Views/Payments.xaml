@@ -5,12 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:POSLite.Client.Views" 
              xmlns:local1="clr-namespace:POSLite.Client.ViewModels" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:Converter="clr-namespace:POSLite.Client.Classes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Width="600" BorderBrush="LightGray" BorderThickness="1">
 
     <UserControl.DataContext>
         <local1:PaymentsViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <Converter:ByteArrayToBitmapImageConverter x:Name="binaryConverter" x:Key="byteToImageConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -33,11 +37,13 @@
                 <DataTemplate>
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock FontSize="20" Grid.Column="0" DockPanel.Dock="Left" Text="{Binding Name}" />
-                        <TextBox FontSize="20" Grid.Column="1" DockPanel.Dock="Right" x:Name="pay" Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Image Grid.Column="0" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding Icon, Converter={StaticResource byteToImageConverter}}"/>
+                        <TextBlock FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" DockPanel.Dock="Left" Text="{Binding Name}" />
+                        <TextBox FontSize="20"  Grid.Column="2" DockPanel.Dock="Right" x:Name="pay" Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POSLite.Client.Views"
-        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:local1="clr-namespace:POSLite.Client.ViewModels" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" x:Class="POSLite.Client.Views.MainView"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" 
+        xmlns:local1="clr-namespace:POSLite.Client.ViewModels"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
+        x:Class="POSLite.Client.Views.MainView"
         mc:Ignorable="d"
         Title="Master POS"  WindowKind="Ribbon"  WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <dx:ThemedWindow.DataContext>

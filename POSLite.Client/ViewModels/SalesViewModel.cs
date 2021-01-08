@@ -18,6 +18,7 @@ namespace POSLite.Client.ViewModels
     {
         protected IWindowService WindowService { get { return this.GetService<IWindowService>(); } }
         protected IDialogService DialogService { get { return this.GetService<IDialogService>("DialogService"); } }
+        protected IWindowService PaymentService { get { return this.GetService<IWindowService>("PaymentService"); } }
         protected IDialogService DialogService1 { get { return this.GetService<IDialogService>("DialogService1"); } }
         protected IDialogService DiscountService { get { return this.GetService<IDialogService>("DiscountService"); } }
         protected IDialogService CustomerService { get { return this.GetService<IDialogService>("CustomerService"); } }

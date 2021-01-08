@@ -178,7 +178,14 @@
     </UserControl.DataContext>
     <dxmvvm:Interaction.Behaviors>
         <dx:DXMessageBoxService/>
-        <dxmvvm:WindowService/>
+        <dxmvvm:WindowService Title="Payments">
+            <dxmvvm:WindowService.WindowStyle>
+                <Style TargetType="Window">
+                    <Setter Property="Width" Value="620"/>
+                    <Setter Property="Height" Value="auto"/>
+                </Style>
+            </dxmvvm:WindowService.WindowStyle>
+        </dxmvvm:WindowService>
         <dxmvvm:DispatcherService />
         <dx:DialogService x:Name="DialogService" DialogWindowStartupLocation="CenterOwner" ViewTemplate="{StaticResource PriceTemplate}">
             <dx:DialogService.DialogStyle>
