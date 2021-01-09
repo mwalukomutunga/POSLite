@@ -10,7 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="App.config" />
     <None Remove="Images\boxes.png" />
     <None Remove="Images\brand.png" />
     <None Remove="Images\icons8-customer-64.png" />

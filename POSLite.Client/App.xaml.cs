@@ -14,12 +14,11 @@ namespace POSLite.Client
     /// </summary>
     public partial class App : Application
     {
-        //protected override void OnStartup(StartupEventArgs e)
-        //{
-            
-        //    base.OnStartup(e);
-        //   // ApplicationThemeHelper.ApplicationThemeName = Theme.Default;
-        //   // ThemeManager.Current.ChangeTheme(this, "Dark.Green");
-        //}
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            // ApplicationThemeHelper.ApplicationThemeName = Theme.Default;
+            // ThemeManager.Current.ChangeTheme(this, "Dark.Green");
+        }
     }
 }

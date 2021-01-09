@@ -20,8 +20,12 @@ namespace POSLite.Domain
         [Display(AutoGenerateField = false)]
         [Key] 
         public Guid PaymentId { get; set; }
+
+        public Guid PaymentMethodId { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
-        public Order Transaction { get; set; }
+
+        public Guid InvoiceId { get; set; }
+        public Invoice Invoice { get; set; }
         public float PaymentAmount { get; set; }
 
         public Guid CustomerId { get; set; }

@@ -17,7 +17,7 @@ namespace POSLite.Persistance
         //}
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    optionsBuilder.UseSqlite("Data Source=POS.db");
+        //    optionsBuilder.UseSqlite("Data Source=POS.db;Version=3;Cache Size=3000;");
         //}
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceLineItem> InvoiceLineItems { get; set; }

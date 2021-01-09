@@ -12,7 +12,9 @@ namespace POSLite.Client.ViewModels
     public enum DocumentType { Items, Customers,Category, Users, Inventory, Orders, Brands, Reports, Sales, Transactions, UOM,InventoryAdjustment, Company, CostCenter,Payments,PayMethods }
     public class MainViewModel : ViewModelBase
     {
+        
         protected IWindowService WindowService { get { return this.GetService<IWindowService>(); } }
+        protected IWindowService WindowService1 { get { return this.GetService<IWindowService>("Payments"); } }
         public DelegateCommand<DocumentType> NavCommand { get; private set; }
         public ILifetimeScope Container { get; private set; }
         public object ChildWindowViewModel { get; }
@@ -69,8 +71,8 @@ namespace POSLite.Client.ViewModels
                         WindowService.Show("Company", scope.Resolve<CompanyViewModel>());
                         break;
                     case DocumentType.Payments:
-                        WindowService.Show("Payments", scope.Resolve<PaymentsViewModel>());
-                        WindowService.Title = "Payments";
+                        WindowService1.Show("Payments", scope.Resolve<PaymentsViewModel>());
+                       
                         break;
                     case DocumentType.PayMethods:
                         WindowService.Show("PaymentMethod", scope.Resolve<PaymentMethodViewModel>());

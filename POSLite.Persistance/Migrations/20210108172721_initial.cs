@@ -15,7 +15,7 @@ namespace POSLite.Persistance.Migrations
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false),
                     Terminus = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -488,22 +488,22 @@ namespace POSLite.Persistance.Migrations
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "BrandId", "CreatedAt", "Name", "Terminus", "UpdatedAt" },
-                values: new object[] { new Guid("dbc00528-46b5-4769-b4f9-f6c685188511"), new DateTime(2020, 12, 13, 10, 59, 20, 93, DateTimeKind.Utc).AddTicks(8852), "Unknown", "DESKTOP-V84PPA9", new DateTime(2020, 12, 13, 10, 59, 20, 93, DateTimeKind.Utc).AddTicks(8857) });
+                values: new object[] { new Guid("133e8151-6353-45dd-a73c-b36453081bff"), new DateTime(2021, 1, 8, 20, 27, 21, 106, DateTimeKind.Utc).AddTicks(7854), "Unknown", "DESKTOP-V84PPA9", new DateTime(2021, 1, 8, 20, 27, 21, 106, DateTimeKind.Utc).AddTicks(7864) });
 
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "CustomerId", "Address", "AmountOfLastDeposit", "CreatedAt", "CurrentBalance", "DateOfBirth", "DateOfLastDeposit", "FullName", "Gender", "OtherDetails", "Terminus", "UpdatedAt" },
-                values: new object[] { new Guid("4042d8cc-a2d3-4cd6-9e82-f2d37a2156e2"), null, 0f, new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8786), 0m, new DateTime(1970, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8761), new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8792), "Walkin Customer", 2, "Anonymous customer", "DESKTOP-V84PPA9", new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(9444) });
+                values: new object[] { new Guid("308980e0-8dd4-46d5-ae46-01e7c735cf6d"), null, 0f, new DateTime(2021, 1, 8, 20, 27, 21, 104, DateTimeKind.Utc).AddTicks(5205), 0m, new DateTime(1971, 1, 8, 20, 27, 21, 104, DateTimeKind.Utc).AddTicks(5158), new DateTime(2021, 1, 8, 20, 27, 21, 104, DateTimeKind.Utc).AddTicks(5210), "Walkin Customer", 2, "Anonymous customer", "DESKTOP-V84PPA9", new DateTime(2021, 1, 8, 20, 27, 21, 104, DateTimeKind.Utc).AddTicks(6890) });
 
             migrationBuilder.InsertData(
                 table: "ItemCategory",
                 columns: new[] { "CategoryId", "CreatedAt", "Description", "Name", "Terminus", "UpdatedAt" },
-                values: new object[] { new Guid("7ddb7b7a-5ab3-4a0d-becf-fadf37cf4f58"), new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(414), "Other", "Other", "DESKTOP-V84PPA9", new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(419) });
+                values: new object[] { new Guid("651b7f71-3c55-4f1a-bbc6-928b4d01adae"), new DateTime(2021, 1, 8, 20, 27, 21, 107, DateTimeKind.Utc).AddTicks(409), "Other", "Other", "DESKTOP-V84PPA9", new DateTime(2021, 1, 8, 20, 27, 21, 107, DateTimeKind.Utc).AddTicks(414) });
 
             migrationBuilder.InsertData(
                 table: "UnitOfMeasurements",
                 columns: new[] { "ID", "CreatedAt", "Terminus", "UOMCode", "UOMDescription", "UpdatedAt" },
-                values: new object[] { new Guid("a96936af-be25-4ff1-b0d1-0ba8395bd44b"), new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(2815), "DESKTOP-V84PPA9", "Each", "Each", new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(2820) });
+                values: new object[] { new Guid("494b0146-333a-41ec-b586-84b71f04bff2"), new DateTime(2021, 1, 8, 20, 27, 21, 107, DateTimeKind.Utc).AddTicks(4130), "DESKTOP-V84PPA9", "Each", "Each", new DateTime(2021, 1, 8, 20, 27, 21, 107, DateTimeKind.Utc).AddTicks(4130) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_InventoryAdjustment_CostCenterId",

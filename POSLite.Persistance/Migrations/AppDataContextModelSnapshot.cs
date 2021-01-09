@@ -26,6 +26,7 @@ namespace POSLite.Persistance.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Terminus")
@@ -41,11 +42,11 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            BrandId = new Guid("dbc00528-46b5-4769-b4f9-f6c685188511"),
-                            CreatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 93, DateTimeKind.Utc).AddTicks(8852),
+                            BrandId = new Guid("133e8151-6353-45dd-a73c-b36453081bff"),
+                            CreatedAt = new DateTime(2021, 1, 8, 20, 27, 21, 106, DateTimeKind.Utc).AddTicks(7854),
                             Name = "Unknown",
                             Terminus = "DESKTOP-V84PPA9",
-                            UpdatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 93, DateTimeKind.Utc).AddTicks(8857)
+                            UpdatedAt = new DateTime(2021, 1, 8, 20, 27, 21, 106, DateTimeKind.Utc).AddTicks(7864)
                         });
                 });
 
@@ -133,17 +134,17 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            CustomerId = new Guid("4042d8cc-a2d3-4cd6-9e82-f2d37a2156e2"),
+                            CustomerId = new Guid("308980e0-8dd4-46d5-ae46-01e7c735cf6d"),
                             AmountOfLastDeposit = 0f,
-                            CreatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8786),
+                            CreatedAt = new DateTime(2021, 1, 8, 20, 27, 21, 104, DateTimeKind.Utc).AddTicks(5205),
                             CurrentBalance = 0m,
-                            DateOfBirth = new DateTime(1970, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8761),
-                            DateOfLastDeposit = new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(8792),
+                            DateOfBirth = new DateTime(1971, 1, 8, 20, 27, 21, 104, DateTimeKind.Utc).AddTicks(5158),
+                            DateOfLastDeposit = new DateTime(2021, 1, 8, 20, 27, 21, 104, DateTimeKind.Utc).AddTicks(5210),
                             FullName = "Walkin Customer",
                             Gender = 2,
                             OtherDetails = "Anonymous customer",
                             Terminus = "DESKTOP-V84PPA9",
-                            UpdatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 92, DateTimeKind.Utc).AddTicks(9444)
+                            UpdatedAt = new DateTime(2021, 1, 8, 20, 27, 21, 104, DateTimeKind.Utc).AddTicks(6890)
                         });
                 });
 
@@ -374,12 +375,12 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            CategoryId = new Guid("7ddb7b7a-5ab3-4a0d-becf-fadf37cf4f58"),
-                            CreatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(414),
+                            CategoryId = new Guid("651b7f71-3c55-4f1a-bbc6-928b4d01adae"),
+                            CreatedAt = new DateTime(2021, 1, 8, 20, 27, 21, 107, DateTimeKind.Utc).AddTicks(409),
                             Description = "Other",
                             Name = "Other",
                             Terminus = "DESKTOP-V84PPA9",
-                            UpdatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(419)
+                            UpdatedAt = new DateTime(2021, 1, 8, 20, 27, 21, 107, DateTimeKind.Utc).AddTicks(414)
                         });
                 });
 
@@ -747,12 +748,12 @@ namespace POSLite.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("a96936af-be25-4ff1-b0d1-0ba8395bd44b"),
-                            CreatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(2815),
+                            ID = new Guid("494b0146-333a-41ec-b586-84b71f04bff2"),
+                            CreatedAt = new DateTime(2021, 1, 8, 20, 27, 21, 107, DateTimeKind.Utc).AddTicks(4130),
                             Terminus = "DESKTOP-V84PPA9",
                             UOMCode = "Each",
                             UOMDescription = "Each",
-                            UpdatedAt = new DateTime(2020, 12, 13, 10, 59, 20, 94, DateTimeKind.Utc).AddTicks(2820)
+                            UpdatedAt = new DateTime(2021, 1, 8, 20, 27, 21, 107, DateTimeKind.Utc).AddTicks(4130)
                         });
                 });
 

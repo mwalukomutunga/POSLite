@@ -273,7 +273,10 @@ namespace POSLite.Client.ViewModels
 
            
         }
-
+        public void ClosePaymentSrceen()
+        {
+            WindowService.Close();
+        }
         private void ClearFields()
         {
             ItemCollection = new ObservableCollection<OrderItem>();

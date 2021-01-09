@@ -23,7 +23,16 @@
                 </Style>
             </dxmvvm:WindowService.WindowStyle>
         </dxmvvm:WindowService>
+        <dxmvvm:WindowService x:Name="Payments" Title="Payments">
+            <dxmvvm:WindowService.WindowStyle>
+                <Style TargetType="Window">
+                    <Setter Property="Width" Value="620"/>
+                    <Setter Property="Height" Value="auto"/>
+                </Style>
+            </dxmvvm:WindowService.WindowStyle>
+        </dxmvvm:WindowService>
     </dxmvvm:Interaction.Behaviors>
+    
 
     <dxlc:TileLayoutControl  AllowItemMoving="False" dxlc:DockLayoutControl.Dock="Client" HorizontalAlignment="Center"  Orientation="Vertical">
         <dxlc:Tile Header="Items" Size="Large" FontSize="15" Command="{Binding NavCommand}" CommandParameter="Items">
